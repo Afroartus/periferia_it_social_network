@@ -1,8 +1,13 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"periferia_it_social_network/database"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
+	database.Seed()
 	run()
 }
 
