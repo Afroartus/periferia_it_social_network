@@ -48,11 +48,19 @@ func CreatePost(c *gin.Context) {
 func LikePost(c *gin.Context) {
 	id := c.Param("id")
 
-	err := database.DB.Model(&models.Post{}).
+	result := database.DB.Model(&models.Post{}).
 		Where("id = ?", id).
-		Update("likes", gorm.Expr("likes + 1")).Error
+		Update("likes", gorm.Expr("likes + 1"))
 
-	if err != nil {
+	if result.Error != nil {
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": "update like",
+			"code":  http.StatusNotFound,
+		})
+		return
+	}
+
+	if result.RowsAffected == 0 {
 		c.JSON(http.StatusNotFound, gin.H{
 			"error": "post not found",
 			"code":  http.StatusNotFound,
