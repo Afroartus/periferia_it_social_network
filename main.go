@@ -3,6 +3,7 @@ package main
 import (
 	"periferia_it_social_network/database"
 	"periferia_it_social_network/models"
+	"periferia_it_social_network/routes"
 
 	"github.com/gin-gonic/gin"
 )
@@ -26,6 +27,8 @@ func run() {
 			"message": "pong",
 		})
 	})
+
+	r.POST("/login", routes.Login)
 
 	err := r.Run()
 	if err != nil {

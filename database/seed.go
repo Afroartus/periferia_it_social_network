@@ -19,7 +19,7 @@ func Seed() {
 	user := models.User{
 		Name:      "John",
 		LastName:  "Perez",
-		Alias:     "JohnP",
+		Username:  "JohnP",
 		Email:     "juan@test.com",
 		Password:  string(password),
 		BirthDate: time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC),
