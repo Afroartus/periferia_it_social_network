@@ -3,6 +3,7 @@ package database
 import (
 	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"gorm.io/driver/postgres"
@@ -10,17 +11,18 @@ import (
 )
 
 const (
-	host     = "db"
-	port     = 5432
-	user     = "postgres"
-	password = "postgres"
-	dbname   = "social_network"
+	port = 5432
 )
 
 var DB *gorm.DB
 
 func ConnectDB() {
-	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable ", host, port, user, password, dbname)
+	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable ",
+		os.Getenv("DB_HOST"),
+		port,
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_NAME"))
 
 	var err error
 	for i := 0; i < 10; i++ {
