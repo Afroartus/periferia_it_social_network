@@ -1,7 +1,7 @@
 package database
 
 import (
-	"periferia_it_social_network/models"
+	models2 "periferia_it_social_network/models"
 	"time"
 
 	"golang.org/x/crypto/bcrypt"
@@ -9,14 +9,14 @@ import (
 
 func Seed() {
 	var count int64
-	DB.Model(&models.User{}).Count(&count)
+	DB.Model(&models2.User{}).Count(&count)
 	if count > 0 {
 		return
 	}
 
 	password, _ := bcrypt.GenerateFromPassword([]byte("password"), bcrypt.DefaultCost)
 
-	user := models.User{
+	user := models2.User{
 		Name:      "John",
 		LastName:  "Perez",
 		Username:  "JohnP",
@@ -27,7 +27,7 @@ func Seed() {
 
 	DB.Create(&user)
 
-	post := models.Post{
+	post := models2.Post{
 		Message: "Create a new post",
 		UserID:  user.ID,
 	}

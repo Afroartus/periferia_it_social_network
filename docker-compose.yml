@@ -12,7 +12,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   api:
-    build: .
+    build: ./backend
     env_file:
       - .env
     container_name: go_api
