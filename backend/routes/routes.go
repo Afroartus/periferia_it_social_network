@@ -29,14 +29,14 @@ func (r *Routes) SetupRoutes() {
 	}))
 
 	r.g.GET("/ping", Ping)
-
-	r.g.POST("user/create", CreateUser)
 	r.g.POST("/login", Login)
+	r.g.POST("user/create", CreateUser)
 
 	auth := r.g.Group("/")
 	auth.Use(middleware.Auth())
 	{
 		auth.GET("/profile/:username", GetProfile)
+		auth.GET("/me", GetMe)
 
 		posts := auth.Group("/posts")
 		{

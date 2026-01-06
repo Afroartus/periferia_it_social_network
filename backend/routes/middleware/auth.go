@@ -50,6 +50,7 @@ func Auth() gin.HandlerFunc {
 		}
 
 		if claims, ok := token.Claims.(*Claims); ok {
+			log.Println(claims.Username)
 			c.Set("username", claims.Username)
 			c.Next()
 		} else {
