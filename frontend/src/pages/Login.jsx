@@ -2,7 +2,7 @@ import {useContext, useState} from "react";
 import {AuthContext} from "../context/AuthContext";
 import api from "../api";
 
-export default function Login(){
+export default function Login({goToRegister}){
     const { login } = useContext(AuthContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -26,6 +26,7 @@ export default function Login(){
                 value={password}
                 onChange={e => setPassword(e.target.value)} />
             <button type="submit">Login</button>
+            <button type="button" onClick={goToRegister}>Register</button>
         </form>
     );
 }
