@@ -11,7 +11,13 @@ import (
 
 func GetPosts(c *gin.Context) {
 	var posts []models.Post
-	database.DB.Order("created_at desc").Find(&posts)
+	err := database.DB.Order("created_at desc").Find(&posts).Error
+	if err != nil {
+		c.JSON(500, gin.H{
+			"message": err,
+		})
+		return
+	}
 	c.JSON(http.StatusOK, gin.H{"posts": posts})
 }
 

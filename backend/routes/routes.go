@@ -21,12 +21,11 @@ func NewRoutes(engine *gin.Engine) *Routes {
 func (r *Routes) SetupRoutes() {
 
 	r.g.Use(cors.New(cors.Config{
-		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
-		AllowHeaders:     []string{"Origin", "Content-Length", "Content-Type"},
-		ExposeHeaders:    []string{"Content-Length"},
-		AllowAllOrigins:  true,
-		AllowCredentials: true,
-		MaxAge:           12 * time.Hour,
+		AllowMethods:    []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
+		AllowHeaders:    []string{"Origin", "Content-Length", "Authorization", "Content-Type"},
+		ExposeHeaders:   []string{"Content-Length"},
+		AllowAllOrigins: true,
+		MaxAge:          12 * time.Hour,
 	}))
 
 	r.g.GET("/ping", Ping)
@@ -41,8 +40,8 @@ func (r *Routes) SetupRoutes() {
 
 		posts := auth.Group("/posts")
 		{
-			posts.GET("/", GetPosts)
-			posts.POST("/create", CreatePost)
+			posts.GET("", GetPosts)
+			posts.POST("", CreatePost)
 			posts.POST("/:id/like", LikePost)
 		}
 
