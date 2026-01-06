@@ -20,18 +20,8 @@ func main() {
 }
 
 func run() {
-	r := gin.Default()
-
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-
-	r.POST("/login", routes.Login)
-
-	err := r.Run()
-	if err != nil {
-		return
-	}
+	g := gin.Default()
+	r := routes.NewRoutes(g)
+	r.SetupRoutes()
+	g.Run(":8080")
 }
