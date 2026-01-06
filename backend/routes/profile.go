@@ -13,7 +13,7 @@ func GetMe(c *gin.Context) {
 	username := c.GetString("username")
 
 	log.Println(username)
-	
+
 	var user models.User
 	result := database.DB.Where("username = ?", username).First(&user)
 
@@ -25,8 +25,11 @@ func GetMe(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"message": user.Username,
+	c.JSON(http.StatusOK, UserResponse{
+		Name:     user.Name,
+		Lastname: user.LastName,
+		Username: user.Username,
+		Email:    user.Email,
 	})
 }
 

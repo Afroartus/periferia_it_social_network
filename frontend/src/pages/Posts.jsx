@@ -1,11 +1,13 @@
 import {useContext, useEffect, useState} from "react";
 import api from "../api";
 import {AuthContext} from "../context/AuthContext";
+import Profile from "./Profile";
 
 
 
 export default function Posts() {
     const  { logout } = useContext(AuthContext);
+  //  const [showProfile, setShowProfile] = useState(true);
     const [posts, setPosts] = useState([]);
     const [message, setMessage] = useState("");
 
@@ -36,6 +38,8 @@ export default function Posts() {
 
     return (
         <div>
+            <Profile />
+
             <button onClick={logout}> logout </button>
 
             <h2>Posts</h2>

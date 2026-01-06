@@ -17,6 +17,13 @@ type UserRequest struct {
 	Password  string `json:"password"`
 	BirthDate string `json:"birth_date"`
 }
+
+type UserResponse struct {
+	Name     string `json:"name"`
+	Lastname string `json:"lastname"`
+	Username string `json:"username"`
+	Email    string `json:"email"`
+}
 type ProfileResponse struct {
 	Name     string `json:"name"`
 	LastName string `json:"lastName"`
